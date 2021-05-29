@@ -38,4 +38,11 @@ void main() {
   /* Any extra question marks will be removed */
   assert(urldat('https://example.com', '/path?', parameters: {'q': 'hello'}) ==
       'https://example.com/path?q=hello');
+
+  /* Create a closure with preconfigured base path, perfect for re-use with
+     similar API roots
+  */
+  final urldatConfig = urldatFactory('https://api.example.com/v1/users');
+  assert(urldatConfig('/:id/posts/:postId', {'id': 10, 'postId': 200}) ==
+      'https://api.example.com/v1/users/10/posts/200');
 }
