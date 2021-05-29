@@ -1,5 +1,12 @@
-class UrldatError extends Error {
-  UrldatError(this.message);
+class UrldatError implements Exception {
+  UrldatError(String message) {
+    _message = message;
+  }
 
-  final String message;
+  String _message = '';
+
+  @override
+  String toString() {
+    return _message;
+  }
 }
