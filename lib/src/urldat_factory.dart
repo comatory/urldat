@@ -11,8 +11,8 @@ import './typedefs.dart';
 /// of [urldat] more convenient.
 UrldatConfiguredFn urldatFactory(String base) {
   return (
-    String pathOrTemplate,
+    String pathOrTemplate, {
     Map<String, dynamic>? parameters,
-  ) =>
+  }) =>
       urldat(base, pathOrTemplate, parameters: parameters);
 }
