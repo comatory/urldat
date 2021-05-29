@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 
-import 'package:urlcat/src/utils/detectors.dart';
+import 'package:urldat/src/utils/detectors.dart';
 
 void main() {
   group('isTemplate', () {

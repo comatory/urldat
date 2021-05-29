@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 
-import 'package:urlcat/src/utils/sanitizers.dart';
+import 'package:urldat/src/utils/sanitizers.dart';
 
 void main() {
   group('removeTrailingSlash', () {

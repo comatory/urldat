@@ -1,13 +1,13 @@
 import './utils/utils.dart';
 import './errors/errors.dart';
 
-typedef Urlcat = String Function(
+typedef Urldat = String Function(
   String base,
   String pathOrTemplate, {
   Map<String, dynamic>? parameters,
 });
 
-String urlcat(
+String urldat(
   String base,
   String pathOrTemplate, {
   Map<String, dynamic>? parameters,
@@ -19,12 +19,12 @@ String urlcat(
 
   if (isTemplate(sanitizedPath)) {
     if (parameters == null) {
-      throw UrlcatError(
+      throw UrldatError(
           'When using path templates, you must pass parameters map.');
     }
 
     if (parameters.isEmpty) {
-      throw UrlcatError(
+      throw UrldatError(
           'When using path templates, you must pass non-empty parameters map.');
     }
 

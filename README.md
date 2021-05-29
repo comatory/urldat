@@ -1,11 +1,11 @@
-Simple URL builder
+Convenient URL builder
 
 ## Description
 
 This library is inspired by Javascript package [urlcat](https://www.npmjs.com/package/urlcat).
 It's a loose port with slightly different API.
 
-Library exposes simple `urlcat` function that helps you build URLs effectively
+Library exposes simple `urldat` function that helps you build URLs effectively
 while avoiding typical mis-steps, like double slashes or unencoded values.
 
 ## Features
@@ -19,10 +19,10 @@ while avoiding typical mis-steps, like double slashes or unencoded values.
 A simple usage example:
 
 ```dart
-import 'package:urlcat/urlcat.dart';
+import 'package:urldat/urldat.dart';
 
 main() {
-  final url = urlcat(
+  final url = urldat(
     'https://example.com',
     '/path',
     parameters: { 'q': 'search', 't': DateTime.now() });

@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 
-import 'package:urlcat/src/utils/converters.dart';
+import 'package:urldat/src/utils/converters.dart';
 
 class TestClass {
   const TestClass({required this.value});

@@ -1,6 +1,6 @@
 import 'package:test/test.dart';
 
-import 'package:urlcat/src/utils/templates.dart';
+import 'package:urldat/src/utils/templates.dart';
 
 void main() {
   group('getTemplateKeys', () {
