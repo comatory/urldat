@@ -12,7 +12,7 @@ void main() {
       final urldatConfig = urldatFactory('https://example.com');
 
       expect(
-          urldatConfig('/path/:id', {
+          urldatConfig('/path/:id', parameters: {
             'id': 11,
             's': 'helloworld',
           }),

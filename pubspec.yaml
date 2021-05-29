@@ -1,6 +1,6 @@
 name: urldat
 description: Convenient URL builder
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/comatory/urldat
 
 environment:

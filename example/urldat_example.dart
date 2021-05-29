@@ -43,6 +43,7 @@ void main() {
      similar API roots
   */
   final urldatConfig = urldatFactory('https://api.example.com/v1/users');
-  assert(urldatConfig('/:id/posts/:postId', {'id': 10, 'postId': 200}) ==
+  assert(urldatConfig('/:id/posts/:postId',
+          parameters: {'id': 10, 'postId': 200}) ==
       'https://api.example.com/v1/users/10/posts/200');
 }
