@@ -1,5 +1,6 @@
-import 'package:urlcat/urlcat.dart';
 import 'package:test/test.dart';
+
+import 'package:urlcat/urlcat.dart';
 
 void main() {
   group('urlcat', () {
