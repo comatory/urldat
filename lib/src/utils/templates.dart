@@ -1,8 +1,6 @@
 import './detectors.dart';
 import './sanitizers.dart';
 
-const allowedValuesExceptionMessage = 'Objects as values are not allowed';
-
 Set<String> getTemplateKeys(String path) {
   return templateRegex.allMatches(path).map((match) {
     return removeLeadingAndTrailingSlash(
