@@ -1,5 +1,7 @@
 Convenient URL builder
 
+![API diagram](doc/urldat.svg)
+
 ## Description
 
 This library is inspired by Javascript package [urlcat](https://www.npmjs.com/package/urlcat).
@@ -13,6 +15,7 @@ while avoiding typical mis-steps, like double slashes or unencoded values.
 * Friendly API
 * No dependencies, uses core Dart library
 * Simple source code, easy to fork
+* `urldatFactory` for creating closures with pre-configured base URL
 
 ## Usage
 
@@ -20,20 +23,20 @@ A simple usage example:
 
 ```dart
 import 'package:urldat/urldat.dart';
+import 'package:http/http.dart' as http;
 
 main() {
   final url = urldat(
-    'https://example.com',
-    '/path',
-    parameters: { 'q': 'search', 't': DateTime.now() });
+    'https://example.com/',
+    '/path/:id',
+    parameters: { 'id': 100, 'q': 'search', 't': DateTime.now() });
 
   http.get(url);
 }
 ```
 
-/* TODO */
 ## Feature requests and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: http://example.com/issues/replaceme
+[tracker]: https://github.com/comatory/urldat/issues
