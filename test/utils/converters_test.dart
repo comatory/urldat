@@ -55,6 +55,51 @@ void main() {
           ),
           equals('ftp://example.com/path'));
     });
+
+    test('should create base with port', () {
+      expect(
+          joinParts(
+            port: 4004,
+            base: 'example.com',
+            path: 'path',
+            query: '',
+          ),
+          equals('example.com:4004/path'));
+    });
+
+    test('should ignore port 80', () {
+      expect(
+          joinParts(
+            port: 80,
+            base: 'example.com',
+            path: 'path',
+            query: '',
+          ),
+          equals('example.com/path'));
+    });
+
+    test('should ignore port 0', () {
+      expect(
+          joinParts(
+            port: 0,
+            base: 'example.com',
+            path: 'path',
+            query: '',
+          ),
+          equals('example.com/path'));
+    });
+
+    test('should create base with port and scheme and query', () {
+      expect(
+          joinParts(
+            port: 9911,
+            scheme: 'ftp',
+            base: 'example.com',
+            path: 'path',
+            query: '?search=what&category=1',
+          ),
+          equals('ftp://example.com:9911/path?search=what&category=1'));
+    });
   });
 
   group('stringifyValuesInMap', () {

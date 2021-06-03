@@ -163,5 +163,12 @@ void main() {
               parameters: {'p': 'test'}, scheme: 'https'),
           throwsA(const TypeMatcher<UrldatError>()));
     });
+
+    test('should create URL with defined port', () {
+      expect(
+          urldat('localhost', '/path/:p',
+              parameters: {'p': 'test'}, port: 4000),
+          equals('localhost:4000/path/test'));
+    });
   });
 }

@@ -19,11 +19,15 @@ import './errors/errors.dart';
 /// with [base] URL when no scheme is present in it.
 /// Warning: Function will throw [UrldatError] when [base] path contains
 /// scheme already.
+///
+/// [port] options is a integer describing the port number, zero or 80 are
+/// ignored in the final URL
 String urldat(
   String base,
   String pathOrTemplate, {
   Map<String, dynamic>? parameters,
-  String? scheme
+  String? scheme,
+  int? port,
 }) {
   final uri = Uri.parse(base);
 
@@ -58,6 +62,7 @@ String urldat(
 
     return joinParts(
       scheme: parsedScheme,
+      port: port,
       base: sanitizedBase,
       path: filledTemplate,
       query: queryParameters,
@@ -68,6 +73,7 @@ String urldat(
 
   return joinParts(
     scheme: parsedScheme,
+    port: port,
     base: sanitizedBase,
     path: sanitizedPath,
     query: queryParameters,

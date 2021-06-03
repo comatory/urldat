@@ -53,4 +53,9 @@ void main() {
   assert(urldat('dart.dev', '/:section',
           parameters: {'section': 'search'}, scheme: 'https') ==
       'https://dart.dev/search');
+
+  /* You can also specify port for base path */
+  assert(urldat('dart.dev', '/:section',
+          parameters: {'section': 'search'}, scheme: 'https', port: 3000) ==
+      'https://dart.dev:3000/search');
 }

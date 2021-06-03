@@ -1,12 +1,15 @@
 String joinParts({
   String? scheme,
+  int? port,
   required String base,
   required String path,
   required String query,
 }) {
-  final baseWithScheme = scheme != null
-    ? '$scheme://$base'
-    : base;
+  final schemePart = scheme != null ? '$scheme://' : '';
+  final portPart = (port != null && port != 0 && port != 80)
+    ? ':$port'
+    : '';
+  final baseWithSchemeAndPort = '$schemePart$base$portPart';
 
   final tail = [path, query].join();
 
@@ -14,10 +17,10 @@ String joinParts({
            query. Do not add slash but join parts together as they are
   */
   if (tail.startsWith('?')) {
-    return [baseWithScheme, tail].join();
+    return [baseWithSchemeAndPort, tail].join();
   }
 
-  return [baseWithScheme, tail].join('/');
+  return [baseWithSchemeAndPort, tail].join('/');
 }
 
 Map<String, String> stringifyValuesInMap(Map<String, dynamic> map) {

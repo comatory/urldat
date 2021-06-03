@@ -12,4 +12,14 @@ void main() {
       expect(isTemplate('/path'), isFalse);
     });
   });
+
+  group('hasScheme', () {
+    test('should detect that URI has scheme', () {
+      expect(hasScheme(Uri.parse('https://dart.dev')), isTrue);
+    });
+
+    test('should NOT detect that URI has scheme', () {
+      expect(hasScheme(Uri.parse('dart.dev')), isFalse);
+    });
+  });
 }
