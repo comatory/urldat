@@ -12,13 +12,36 @@ import './errors/errors.dart';
 /// Extra keys in [parameters] that do not map to [pathOrTemplate] are
 /// always used as query parameters.
 ///
-/// If [pathOrTemplate] is template (contains `:`) and no [parameters] are
+/// If [pathOrTemplate] is template (contains `:colon`) and no [parameters] are
 /// provided, [UrldatError] exception will be thrown.
-String urldat(
-  String base,
-  String pathOrTemplate, {
-  Map<String, dynamic>? parameters,
-}) {
+///
+/// [scheme] option is a valid URI scheme. It's intended to be used
+/// with [base] URL when no scheme is present in it.
+/// Warning: Function will throw [UrldatError] when [base] path contains
+/// scheme already.
+///
+/// [port] option is a integer describing the port number, zero or 80 are
+/// ignored in the final URL
+///
+/// [fragment] option will append fragment to URL. When URL already contains
+/// fragment value, [UrldatError] will be thrown
+String urldat(String base, String pathOrTemplate,
+    {Map<String, dynamic>? parameters,
+    String? scheme,
+    int? port,
+    String? fragment}) {
+  final uri = Uri.parse(base);
+
+  if (hasScheme(uri) && scheme != null) {
+    throw UrldatError.basePathSchemeError();
+  }
+
+  if (hasFragment(pathOrTemplate) && fragment != null) {
+    throw UrldatError.pathFragmentError();
+  }
+
+  final parsedScheme = scheme != null ? Uri(scheme: scheme).scheme : null;
+
   final sanitizedBase = removeTrailingSlash(base);
   final sanitizedPathWithoutSlash =
       removeLeadingAndTrailingSlash(pathOrTemplate);
@@ -26,13 +49,11 @@ String urldat(
 
   if (isTemplate(sanitizedPath)) {
     if (parameters == null) {
-      throw UrldatError(
-          'When using path templates, you must pass parameters map.');
+      throw UrldatError.missingParametersWithTemplateError();
     }
 
     if (parameters.isEmpty) {
-      throw UrldatError(
-          'When using path templates, you must pass non-empty parameters map.');
+      throw UrldatError.emptyParametersWithTemplateError();
     }
 
     final templateKeys = getTemplateKeys(sanitizedPath);
@@ -48,6 +69,9 @@ String urldat(
       base: sanitizedBase,
       path: filledTemplate,
       query: queryParameters,
+      scheme: parsedScheme,
+      port: port,
+      fragment: fragment,
     );
   }
 
@@ -57,5 +81,8 @@ String urldat(
     base: sanitizedBase,
     path: sanitizedPath,
     query: queryParameters,
+    scheme: parsedScheme,
+    port: port,
+    fragment: fragment,
   );
 }

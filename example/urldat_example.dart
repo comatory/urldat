@@ -46,4 +46,24 @@ void main() {
   assert(urldatConfig('/:id/posts/:postId',
           parameters: {'id': 10, 'postId': 200}) ==
       'https://api.example.com/v1/users/10/posts/200');
+
+  /* If you want more convenience, pass `scheme` like http/https
+     as an option.
+  */
+  assert(urldat('dart.dev', '/:section',
+          parameters: {'section': 'search'}, scheme: 'https') ==
+      'https://dart.dev/search');
+
+  /* You can also specify port for base path */
+  assert(urldat('dart.dev', '/:section',
+          parameters: {'section': 'search'}, scheme: 'https', port: 3000) ==
+      'https://dart.dev:3000/search');
+
+  /* You can also specify fragment for path */
+  assert(urldat('dart.dev', '/:section',
+          parameters: {'section': 'search'},
+          scheme: 'https',
+          port: 3000,
+          fragment: 'hello') ==
+      'https://dart.dev:3000/search#hello');
 }

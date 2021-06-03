@@ -12,4 +12,24 @@ void main() {
       expect(isTemplate('/path'), isFalse);
     });
   });
+
+  group('hasScheme', () {
+    test('should detect that URI has scheme', () {
+      expect(hasScheme(Uri.parse('https://dart.dev')), isTrue);
+    });
+
+    test('should NOT detect that URI has scheme', () {
+      expect(hasScheme(Uri.parse('dart.dev')), isFalse);
+    });
+  });
+
+  group('hasFragment', () {
+    test('should detect that path has fragment', () {
+      expect(hasFragment('/path/:section#fragment'), isTrue);
+    });
+
+    test('should NOT detect that path has fragment', () {
+      expect(hasFragment('/path/:section'), isFalse);
+    });
+  });
 }
