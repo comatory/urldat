@@ -6,9 +6,7 @@ String joinParts({
   required String query,
 }) {
   final schemePart = scheme != null ? '$scheme://' : '';
-  final portPart = (port != null && port != 0 && port != 80)
-    ? ':$port'
-    : '';
+  final portPart = (port != null && port != 0 && port != 80) ? ':$port' : '';
   final baseWithSchemeAndPort = '$schemePart$base$portPart';
 
   final tail = [path, query].join();

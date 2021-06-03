@@ -7,15 +7,16 @@ class UrldatError implements Exception {
     _message = message;
     _id = id;
   }
-  UrldatError.basePathSchemeError() :
-    _message = 'Base path already contains a scheme. Remove scheme option.',
-    _id = UrldatErrorId.basePathSchemeError;
-  UrldatError.missingParametersWithTemplateError() :
-    _message = 'When using path templates, you must pass parameters map.',
-    _id = UrldatErrorId.missingParametersWithTemplateError;
-  UrldatError.emptyParametersWithTemplateError() :
-    _message = 'When using path templates, you must pass non-empty parameters map.',
-    _id = UrldatErrorId.emptyParametersWithTemplateError;
+  UrldatError.basePathSchemeError()
+      : _message = 'Base path already contains a scheme. Remove scheme option.',
+        _id = UrldatErrorId.basePathSchemeError;
+  UrldatError.missingParametersWithTemplateError()
+      : _message = 'When using path templates, you must pass parameters map.',
+        _id = UrldatErrorId.missingParametersWithTemplateError;
+  UrldatError.emptyParametersWithTemplateError()
+      : _message =
+            'When using path templates, you must pass non-empty parameters map.',
+        _id = UrldatErrorId.emptyParametersWithTemplateError;
 
   late String _message;
   late UrldatErrorId _id;
@@ -24,7 +25,7 @@ class UrldatError implements Exception {
 
   @override
   String toString() {
-    return [ _id, _message ].join('\n');
+    return [_id, _message].join('\n');
   }
 }
 
