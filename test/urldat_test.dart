@@ -170,5 +170,21 @@ void main() {
               parameters: {'p': 'test'}, port: 4000),
           equals('localhost:4000/path/test'));
     });
+
+    test('should create URL with defined fragment', () {
+      expect(
+          urldat('https://dart.dev', '/path/:p',
+              parameters: {'p': 'test'}, fragment: 'about'),
+          equals('https://dart.dev/path/test#about'));
+    });
+
+    test(
+        'should throw error when fragment option is defined and'
+        'URL contains fragment as well', () {
+      expect(
+          () => urldat('https://dart.dev', '/path/:p#about',
+              parameters: {'p': 'test'}, fragment: 'about'),
+          throwsA(const TypeMatcher<UrldatError>()));
+    });
   });
 }

@@ -20,19 +20,24 @@ import './errors/errors.dart';
 /// Warning: Function will throw [UrldatError] when [base] path contains
 /// scheme already.
 ///
-/// [port] options is a integer describing the port number, zero or 80 are
+/// [port] option is a integer describing the port number, zero or 80 are
 /// ignored in the final URL
-String urldat(
-  String base,
-  String pathOrTemplate, {
-  Map<String, dynamic>? parameters,
-  String? scheme,
-  int? port,
-}) {
+///
+/// [fragment] option will append fragment to URL. When URL already contains
+/// fragment value, [UrldatError] will be thrown
+String urldat(String base, String pathOrTemplate,
+    {Map<String, dynamic>? parameters,
+    String? scheme,
+    int? port,
+    String? fragment}) {
   final uri = Uri.parse(base);
 
   if (hasScheme(uri) && scheme != null) {
     throw UrldatError.basePathSchemeError();
+  }
+
+  if (hasFragment(pathOrTemplate) && fragment != null) {
+    throw UrldatError.pathFragmentError();
   }
 
   final parsedScheme = scheme != null ? Uri(scheme: scheme).scheme : null;
@@ -61,21 +66,23 @@ String urldat(
         createQueryParametersWithKeys(parameters, queryParameterKeys);
 
     return joinParts(
-      scheme: parsedScheme,
-      port: port,
       base: sanitizedBase,
       path: filledTemplate,
       query: queryParameters,
+      scheme: parsedScheme,
+      port: port,
+      fragment: fragment,
     );
   }
 
   final queryParameters = createQueryParameters(parameters);
 
   return joinParts(
-    scheme: parsedScheme,
-    port: port,
     base: sanitizedBase,
     path: sanitizedPath,
     query: queryParameters,
+    scheme: parsedScheme,
+    port: port,
+    fragment: fragment,
   );
 }

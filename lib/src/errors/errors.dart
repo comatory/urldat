@@ -10,6 +10,10 @@ class UrldatError implements Exception {
   UrldatError.basePathSchemeError()
       : _message = 'Base path already contains a scheme. Remove scheme option.',
         _id = UrldatErrorId.basePathSchemeError;
+  UrldatError.pathFragmentError()
+      : _message =
+            'Base path already contains a fragment. Remove fragment option.',
+        _id = UrldatErrorId.pathFragmentError;
   UrldatError.missingParametersWithTemplateError()
       : _message = 'When using path templates, you must pass parameters map.',
         _id = UrldatErrorId.missingParametersWithTemplateError;
@@ -32,6 +36,7 @@ class UrldatError implements Exception {
 /// ID for catching type of errors programatically
 enum UrldatErrorId {
   basePathSchemeError,
+  pathFragmentError,
   missingParametersWithTemplateError,
   emptyParametersWithTemplateError,
 }

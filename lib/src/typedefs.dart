@@ -3,6 +3,7 @@ typedef UrldatConfiguredFn = String Function(
   Map<String, dynamic>? parameters,
   String? scheme,
   int? port,
+  String? fragment,
 });
 
 typedef UrldatFn = String Function(
@@ -11,4 +12,5 @@ typedef UrldatFn = String Function(
   Map<String, dynamic>? parameters,
   String? scheme,
   int? port,
+  String? fragment,
 });

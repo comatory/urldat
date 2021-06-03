@@ -22,4 +22,14 @@ void main() {
       expect(hasScheme(Uri.parse('dart.dev')), isFalse);
     });
   });
+
+  group('hasFragment', () {
+    test('should detect that path has fragment', () {
+      expect(hasFragment('/path/:section#fragment'), isTrue);
+    });
+
+    test('should NOT detect that path has fragment', () {
+      expect(hasFragment('/path/:section'), isFalse);
+    });
+  });
 }

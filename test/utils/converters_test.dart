@@ -100,6 +100,30 @@ void main() {
           ),
           equals('ftp://example.com:9911/path?search=what&category=1'));
     });
+
+    test('should create URL with fragment', () {
+      expect(
+          joinParts(
+              base: 'example.com',
+              path: 'path/to/somewhere',
+              query: '',
+              fragment: 'about-me'),
+          equals('example.com/path/to/somewhere#about-me'));
+    });
+
+    test('should create base with port, scheme, query and fragment', () {
+      expect(
+          joinParts(
+            port: 9911,
+            scheme: 'ftp',
+            base: 'example.com',
+            path: 'path',
+            fragment: 'section-1',
+            query: '?search=what&category=1',
+          ),
+          equals(
+              'ftp://example.com:9911/path?search=what&category=1#section-1'));
+    });
   });
 
   group('stringifyValuesInMap', () {

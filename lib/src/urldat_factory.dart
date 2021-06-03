@@ -15,6 +15,7 @@ UrldatConfiguredFn urldatFactory(String base) {
     Map<String, dynamic>? parameters,
     String? scheme,
     int? port,
+    String? fragment,
   }) =>
       urldat(base, pathOrTemplate, parameters: parameters);
 }
