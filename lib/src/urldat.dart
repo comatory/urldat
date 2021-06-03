@@ -28,7 +28,7 @@ String urldat(
   final uri = Uri.parse(base);
 
   if (hasScheme(uri) && scheme != null) {
-    throw UrldatError('Base path already contains a scheme. Remove scheme option.');
+    throw UrldatError.basePathSchemeError();
   }
 
   final parsedScheme = scheme != null ? Uri(scheme: scheme).scheme : null;
@@ -40,13 +40,11 @@ String urldat(
 
   if (isTemplate(sanitizedPath)) {
     if (parameters == null) {
-      throw UrldatError(
-          'When using path templates, you must pass parameters map.');
+      throw UrldatError.missingParametersWithTemplateError();
     }
 
     if (parameters.isEmpty) {
-      throw UrldatError(
-          'When using path templates, you must pass non-empty parameters map.');
+      throw UrldatError.emptyParametersWithTemplateError();
     }
 
     final templateKeys = getTemplateKeys(sanitizedPath);

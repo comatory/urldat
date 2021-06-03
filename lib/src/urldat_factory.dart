@@ -13,6 +13,7 @@ UrldatConfiguredFn urldatFactory(String base) {
   return (
     String pathOrTemplate, {
     Map<String, dynamic>? parameters,
+    String? scheme,
   }) =>
       urldat(base, pathOrTemplate, parameters: parameters);
 }
