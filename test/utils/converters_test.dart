@@ -44,6 +44,17 @@ void main() {
           ),
           equals('http://example.com/path'));
     });
+
+    test('should create base with passed in scheme', () {
+      expect(
+          joinParts(
+            scheme: Uri(scheme: 'ftp').scheme,
+            base: 'example.com',
+            path: 'path',
+            query: '',
+          ),
+          equals('ftp://example.com/path'));
+    });
   });
 
   group('stringifyValuesInMap', () {

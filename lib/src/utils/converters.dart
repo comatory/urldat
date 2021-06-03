@@ -1,18 +1,23 @@
 String joinParts({
+  String? scheme,
   required String base,
   required String path,
   required String query,
 }) {
+  final baseWithScheme = scheme != null
+    ? '$scheme://$base'
+    : base;
+
   final tail = [path, query].join();
 
   /* NOTE: In case path or template is empty string, tail becomes just
            query. Do not add slash but join parts together as they are
   */
   if (tail.startsWith('?')) {
-    return [base, tail].join();
+    return [baseWithScheme, tail].join();
   }
 
-  return [base, tail].join('/');
+  return [baseWithScheme, tail].join('/');
 }
 
 Map<String, String> stringifyValuesInMap(Map<String, dynamic> map) {

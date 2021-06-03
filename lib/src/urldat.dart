@@ -12,13 +12,27 @@ import './errors/errors.dart';
 /// Extra keys in [parameters] that do not map to [pathOrTemplate] are
 /// always used as query parameters.
 ///
-/// If [pathOrTemplate] is template (contains `:`) and no [parameters] are
+/// If [pathOrTemplate] is template (contains `:colon`) and no [parameters] are
 /// provided, [UrldatError] exception will be thrown.
+///
+/// [scheme] option is a valid URI scheme. It's intended to be used
+/// with [base] URL when no scheme is present in it.
+/// Warning: Function will throw [UrldatError] when [base] path contains
+/// scheme already.
 String urldat(
   String base,
   String pathOrTemplate, {
   Map<String, dynamic>? parameters,
+  String? scheme
 }) {
+  final uri = Uri.parse(base);
+
+  if (hasScheme(uri) && scheme != null) {
+    throw UrldatError('Base path already contains a scheme. Remove scheme option.');
+  }
+
+  final parsedScheme = scheme != null ? Uri(scheme: scheme).scheme : null;
+
   final sanitizedBase = removeTrailingSlash(base);
   final sanitizedPathWithoutSlash =
       removeLeadingAndTrailingSlash(pathOrTemplate);
@@ -45,6 +59,7 @@ String urldat(
         createQueryParametersWithKeys(parameters, queryParameterKeys);
 
     return joinParts(
+      scheme: parsedScheme,
       base: sanitizedBase,
       path: filledTemplate,
       query: queryParameters,
@@ -54,6 +69,7 @@ String urldat(
   final queryParameters = createQueryParameters(parameters);
 
   return joinParts(
+    scheme: parsedScheme,
     base: sanitizedBase,
     path: sanitizedPath,
     query: queryParameters,

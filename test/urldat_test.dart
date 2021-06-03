@@ -146,4 +146,22 @@ void main() {
           equals('http://localhost:3000/path/test'));
     });
   });
+
+  group('additional options', () {
+    test('should create URL with defined scheme', () {
+      expect(
+          urldat('dart.dev', '/path/:p',
+              parameters: {'p': 'test'}, scheme: 'https'),
+          equals('https://dart.dev/path/test'));
+    });
+
+    test(
+        'should throw error when scheme option is defined and'
+        'URL contains scheme as well', () {
+      expect(
+          () => urldat('https://dart.dev', '/path/:p',
+              parameters: {'p': 'test'}, scheme: 'https'),
+          throwsA(const TypeMatcher<UrldatError>()));
+    });
+  });
 }
